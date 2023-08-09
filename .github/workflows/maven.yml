@@ -16,6 +16,8 @@ jobs:
       - name: Build and Deploy Shopfront
         working-directory: shopfront
         run: |
+          ls
+          ls -l
           cd shopfront
           mvn clean install 
           docker build -t halouani/shopfront:latest .
