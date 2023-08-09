@@ -16,24 +16,18 @@ jobs:
       - name: Build and Deploy Shopfront
         working-directory: shopfront
         run: |
-          ls
-          ls -l
-          cd shopfront
           mvn clean install 
           docker build -t halouani/shopfront:latest .
 
       - name: Build and Deploy Product Catalogue
         working-directory: productcatalogue
         run: |
-          ls
-          cd productcatalogue
           mvn clean install 
           docker build -t halouani/productcatalogue:latest .
 
       - name: Build and Deploy Stock
         working-directory: stockmanager
         run: |
-          cd stockmanager
           mvn clean install 
           docker build -t halouani/stockmanager:latest .
 
