@@ -41,5 +41,5 @@ jobs:
         run: |
           docker push halouani/shopfront:latest
           docker push halouani/productcatalogue:latest
-          docker push halouani/stock:managerlatest
+          docker push halouani/stockmanagerlatest
           
