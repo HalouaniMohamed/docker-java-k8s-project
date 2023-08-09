@@ -1,0 +1,44 @@
+name: Build and Deploy Microservices
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build and Deploy Shopfront
+        working-directory: shopfront
+        run: |
+          cd shopfront
+          mvn clean install 
+          docker build -t halouani/shopfront:latest .
+
+      - name: Build and Deploy Product Catalogue
+        working-directory: productcatalogue
+        run: |
+          cd productcatalogue
+          mvn clean install 
+          docker build -t halouani/productcatalogue:latest .
+
+      - name: Build and Deploy Stock
+        working-directory: stockmanager
+        run: |
+          cd stockmanager
+          mvn clean install 
+          docker build -t halouani/stockmanager:latest .
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push Docker Images to Docker Hub
+        run: |
+          docker push halouani/shopfront:latest
+          docker push halouani/productcatalogue:latest
+          docker push halouani/stock:managerlatest
