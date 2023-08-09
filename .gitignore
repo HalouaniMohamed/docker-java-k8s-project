@@ -26,7 +26,6 @@ hs_err_pid*
 replay_pid*
 
 ### Maven ###
-<<<<<<< HEAD
 # /target/**
 # */target/**
 # */target/*
@@ -34,9 +33,7 @@ replay_pid*
 **/target/
 # **/target/**
 # target/
-=======
-target/
->>>>>>> 9db95ff (init gitignore file)
+
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
