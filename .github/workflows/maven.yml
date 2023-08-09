@@ -23,6 +23,7 @@ jobs:
       - name: Build and Deploy Product Catalogue
         working-directory: productcatalogue
         run: |
+          ls
           cd productcatalogue
           mvn clean install 
           docker build -t halouani/productcatalogue:latest .
