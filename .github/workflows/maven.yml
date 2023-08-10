@@ -3,7 +3,7 @@ name: Build and Deploy Microservices
 on:
   push:
     branches:
-      - main
+      - test
 
 jobs:
   build-and-deploy:
