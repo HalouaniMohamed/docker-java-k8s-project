@@ -1,0 +1,36 @@
+name: Build and Deploy Stockmanager 
+
+on:
+  push:
+    branches:
+      - main
+    paths: ./stockmanager/**
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@1
+        with:
+          java-version: 1.8
+
+      - name: Build and Deploy stockmanager
+        working-directory: stockmanager
+        run: |
+          mvn clean install 
+          docker build -t halouani/stockmanager:latest .
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push Docker Images to Docker Hub
+        run: docker push halouani/stockmanager:latest
+          
