@@ -1,82 +1,44 @@
-# name: Build and Deploy Microservices
-
-# on:
-#   push:
-#     branches:
-#       - main
-
-# jobs:
-#   build-and-deploy:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout Repository
-#         uses: actions/checkout@v3
-
-#       - name: Build and Deploy Shopfront
-#         working-directory: shopfront
-#         run: |
-#           mvn clean install 
-#           docker build -t halouani/shopfront:latest .
-
-#       - name: Build and Deploy Product Catalogue
-#         working-directory: productcatalogue
-#         run: |
-#           mvn clean install 
-#           docker build -t halouani/productcatalogue:latest .
-
-#       - name: Build and Deploy Stock
-#         working-directory: stockmanager
-#         run: |
-#           mvn clean install 
-#           docker build -t halouani/stockmanager:latest .
-
-#       - name: Login to Docker Hub
-#         uses: docker/login-action@v2
-#         with:
-#           username: ${{ secrets.DOCKERHUB_USERNAME }}
-#           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-#       - name: Push Docker Images to Docker Hub
-#         run: |
-#           docker push halouani/shopfront:latest
-#           docker push halouani/productcatalogue:latest
-#           docker push halouani/stockmanager:latest
-name: stockmanager - Java CI with Maven, and Docker Build and Push
+name: Build and Deploy Microservices
 
 on:
   push:
-    branches: [ main ]
-#     paths: ./stockmanager/**
-
+    branches:
+      - main
 
 jobs:
-  build:
-
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-    - name: Build with Maven
-      run: mvn -B package --file stockmanager/pom.xml    
-      
-    - name: Login to Docker Hub
-      uses: docker/login-action@v2
-      with:
-           username: ${{ secrets.DOCKERHUB_USERNAME }}
-           password: ${{ secrets.DOCKERHUB_TOKEN }}
-           
-    - name: Set up Docker Buildx
-      id: buildx
-      uses: docker/setup-buildx-action@v1
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v2.2.1
-      with:
-        context: stockmanager/.
-        file: stockmanager/Dockerfile
-        tags: halouani/stockmanager
-        push: true
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Build and Deploy Shopfront
+        working-directory: shopfront
+        run: |
+          mvn clean install 
+          docker build -t halouani/shopfront:latest .
+
+      - name: Build and Deploy Product Catalogue
+        working-directory: productcatalogue
+        run: |
+          mvn clean install 
+          docker build -t halouani/productcatalogue:latest .
+
+      - name: Build and Deploy Stock
+        working-directory: stockmanager
+        run: |
+          mvn clean install 
+          docker build -t halouani/stockmanager:latest .
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push Docker Images to Docker Hub
+        run: |
+          docker push halouani/shopfront:latest
+          docker push halouani/productcatalogue:latest
+          docker push halouani/stockmanager:latest
