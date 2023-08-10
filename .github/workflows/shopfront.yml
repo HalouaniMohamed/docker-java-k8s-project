@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-    paths: ./shopfront/**
+    paths:
+      - 'shopfront/**'
 
 jobs:
   build-and-deploy:
