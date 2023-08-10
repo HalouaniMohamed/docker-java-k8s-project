@@ -46,7 +46,7 @@ name: stockmanager - Java CI with Maven, and Docker Build and Push
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 #     paths: ./stockmanager/**
 
 
