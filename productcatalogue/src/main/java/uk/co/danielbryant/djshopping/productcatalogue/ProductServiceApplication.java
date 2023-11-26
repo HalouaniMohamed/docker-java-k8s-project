@@ -15,7 +15,7 @@ public class ProductServiceApplication extends Application<ProductServiceConfigu
     }
 
     @Override
-    public String getName() {
+    public String getName() { 
         return "product-list-service";
     }
 
