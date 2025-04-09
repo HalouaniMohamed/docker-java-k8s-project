@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@3
         with:
           java-version: '1.8'
-          distribution: 'adopt'
+          distribution: 'temurin'
 
       - name: Build and Deploy Shopfront
         working-directory: shopfront
